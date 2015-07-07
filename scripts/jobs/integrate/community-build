@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-scripts/dbuild-runner.sh "community.dbuild" "0.9.1" "${@}"
+
+# for 0.9.1, do export DBUILDREPO="http://repo.typesafe.com/typesafe/temp-distributed-build-snapshots"
+scripts/dbuild-runner.sh "community.dbuild" "0.9.3" "${@}"

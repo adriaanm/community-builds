@@ -27,21 +27,11 @@ strip0() {
   echo $(($(echo "$1" | sed 's/^0*//')))
 }
 
+DBUILDREPO="${DBUILDREPO-https://dl.bintray.com/typesafe/ivy-releases}"
+
 if [ ! -d "dbuild-${DBUILDVERSION}" ]
 then
-  a=( ${DBUILDVERSION//./ } )
-  maj=$(strip0 "${a[0]}")
-  min=$(strip0 "${a[1]}")
-  if [[ ( $maj -lt 1 ) && ( $min -lt 9 ) ]]
-  then
-    # old location for dbuild <0.9.0 (stored on S3)
-    wget "http://downloads.typesafe.com/dbuild/${DBUILDVERSION}/dbuild-${DBUILDVERSION}.tgz"
-  else
-    # new location for dbuild >=0.9.0 (regular artifact)
-    wget "http://repo.typesafe.com/typesafe/temp-distributed-build-snapshots/com.typesafe.dbuild/dbuild/${DBUILDVERSION}/tgzs/dbuild-${DBUILDVERSION}.tgz"
-  fi
-  tar xfz "dbuild-${DBUILDVERSION}.tgz"
-  rm "dbuild-${DBUILDVERSION}.tgz"
+  wget "$DBUILDREPO/com.typesafe.dbuild/dbuild/${DBUILDVERSION}/tgzs/dbuild-${DBUILDVERSION}.tgz" -O - | tar xz
 fi
 
 echo "dbuild-${DBUILDVERSION}/bin/dbuild" "${@}" "$DBUILDCONFIG"
