@@ -77,10 +77,10 @@ build += {
     extra.commands: ["clean", "plugin/compile:package"]
   }
 
-  ${vars.base} {
-    name: "scala-partest"
-    uri: "https://github.com/"${vars.scala-partest-ref}
-  }
+  // ${vars.base} {
+  //   name: "scala-partest"
+  //   uri: "https://github.com/"${vars.scala-partest-ref}
+  // }
 
   ${vars.base} {
     name: scalacheck
