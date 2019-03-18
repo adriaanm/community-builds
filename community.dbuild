@@ -29,39 +29,34 @@ build += {
     }
     extra.parts.projects: [
       {
-        system: "scala"
-        name:  "scala"
-        uri:    "https://github.com/"${vars.scala-ref}
-        extra.build-options: ["-Dlocker.skip=1", "-Ddocs.skip=1"] // speed things up a little
+        set-version: ${vars.scala-version}
+        name:   scala-library
+        system: aether
+        uri:   "aether:org.scala-lang#scala-library;"${vars.scala-version}
       }
       {
-        name: "scala-xml"
-        uri: "https://github.com/"${vars.scala-xml-ref}
-        extra.commands: [
-          // override scalaVersion in the modules since otherwise we get
-          // whatever random Scala version the module has -- it might be a
-          // 2.12.x version, we don't want that!
-          "set every scalaVersion := \"2.11.12\""
-          // work around https://github.com/scala/community-builds/issues/575
-          // (in a community build context, we don't need MiMa to run)
-          "set every ScalaModulePlugin.mimaPreviousVersion := None"
-        ]
-        extra.projects: ["xml"]
+        set-version: ${vars.scala-version}
+        name:   scala-reflect
+        system: aether
+        uri:   "aether:org.scala-lang#scala-reflect;"${vars.scala-version}
       }
       {
-        name: "scala-parser-combinators"
-        uri: "https://github.com/"${vars.scala-parser-combinators-ref}
-        extra.sbt-version: "1.2.8"
-        extra.commands: [
-          // override scalaVersion in the modules since otherwise we get
-          // whatever random Scala version the module has -- it might be a
-          // 2.12.x version, we don't want that!
-          "set every scalaVersion := \"2.11.12\""
-          // work around https://github.com/scala/community-builds/issues/575
-          // (in a community build context, we don't need MiMa to run)
-          "set every ScalaModulePlugin.mimaPreviousVersion := None"
-        ]
-        extra.projects: ["scala-parser-combinators"]   // no JS or Native
+        set-version: ${vars.scala-version}
+        name:   scala-compiler
+        system: aether
+        uri:   "aether:org.scala-lang#scala-compiler;"${vars.scala-version}
+      }
+      {
+        set-version: "1.0.6"
+        name:   scala-xml
+        system: aether
+        uri:   "aether:org.scala-lang.modules#scala-xml_2.11;1.0.6"
+      }
+      {
+        set-version: "1.0.7"
+        name:   scala-parser-combinators
+        system: aether
+        uri:   "aether:org.scala-lang.modules#scala-parser-combinators_2.11;1.0.7"
       }
     ]
   }
