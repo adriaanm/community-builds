@@ -9,6 +9,10 @@ rm -rf target-*/extraction || true
 # specifying projects to be built, instead of hijacking the
 # "scala_build_extra_opt" name for that purpose
 
+export ANT_OPTS="-Dfile.encoding=UTF-8 -Xmx2G -Xss1M -Dpartest.threads=4 -Djava.io.tmpdir=/home/jenkins/tmp"
+export JAVA_OPTS="-Dfile.encoding=UTF-8 -Xmx2G -Xss1M -Dpartest.threads=4 -Djava.io.tmpdir=/home/jenkins/tmp"
+export MAVEN_OPTS="-Dfile.encoding=UTF-8 -Xmx2G -Xss1M -Dpartest.threads=4 -Djava.io.tmpdir=/home/jenkins/tmp"
+
 ./run.sh $scala_build_extra_opt || STATUS="$?"
 
 # ideally we would keep these around for doing postmortems
