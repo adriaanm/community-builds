@@ -21,12 +21,7 @@ build += {
   {
     name:  "scala"
     system: assemble
-    extra.parts: {
-      cross-version: standard
-      sbt-version: ${vars.sbt-version}
-      extraction-version: "2.11.12"
-      cross-version: disabled
-    }
+    cross-version: binary
     extra.parts.projects: [
       {
         set-version: ${vars.scala-version}
